@@ -164,9 +164,36 @@ export function getIndvData(id) {
   onValue(indvRef, (snapshot) => {
     individualdata = snapshot.val();
     if (individualdata) {
-      // console.log("data inside getindvdata ", individualdata);
+      console.log("data inside getindvdata ", individualdata);
     } else {
       // console.log("No data found");
     }
   });
 }
+
+export const uploadImage = (file) => {
+  try {
+    // console.log(file);
+    if (!file) {
+      console.log("no file uploaded");
+      return Promise.resolve(
+        "https://firebasestorage.googleapis.com/v0/b/hr-management-app-8caae.appspot.com/o/avatar.svg?alt=media&token=eca73af5-ec6f-412b-8b85-ee0bc5f9e957&_gl=1*158ba7t*_ga*OTI0MjIxMjY2LjE2OTY5MTQ0MTY.*_ga_CW55HF8NVT*MTY5NzgwNTc0OC4yMC4xLjE2OTc4MDc0ODEuMjUuMC4w"
+      );
+    }
+    const storage = getStorage();
+    const storageRef = strRef(storage, crypto.randomUUID());
+    return uploadBytes(storageRef, file).then((snapshot) => {
+      // console.log(snapshot);
+      return getDownloadURL(snapshot.ref);
+    });
+  } catch (err) {
+    console.log("fail image", err);
+  }
+};
+
+// export const addEmployeeImage = async (file) => {
+//   // console.log(await uploadImage(file));
+//   data.imageURL = await uploadImage(file);
+//   console.log(data.imgURL);
+// };
+// empData.imgURL = await uploadImage(file)

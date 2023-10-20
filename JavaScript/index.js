@@ -5,7 +5,7 @@ import {
   renderSkills,
   renderTable,
 } from "./UI.js";
-import { editModal, indArr } from "./editModal.js";
+import { blank, editModal, indArr } from "./editModal.js";
 import {
   createUser,
   deleteUser,
@@ -15,9 +15,10 @@ import {
   getSkills,
   getUser,
   updateUser,
+  uploadImage,
 } from "./firebase.js";
 import { alterTable } from "./list.js";
-import { searchElement } from "./search.js";
+// import { searchElement } from "./search.js";
 import { sortColumn } from "./sort.js";
 import {
   dob,
@@ -37,7 +38,7 @@ const searchForm = document.querySelector(".search-form");
 const addEditEmployeeModal = document.querySelector(".add-edit-employee-modal");
 const addEmployee = document.querySelector(".add-employee-btn");
 const photoId = document.getElementById("photo-id");
-const profilePhoto = document.querySelector(".add-edit-profile-photo");
+export const profilePhoto = document.querySelector(".add-edit-profile-photo");
 export const skillAddSearch = document.querySelector("#skill-add-search");
 const addSkillList = document.querySelector(".add-skill-list");
 const addRoleList = document.querySelector(".add-role-list");
@@ -111,19 +112,26 @@ closeAddEditModalIcon.onclick = () => {
   addEditEmployeeModal.classList.add("close");
   overlay.classList.remove("open");
   addSelectedSkills.innerHTML = "";
+  arr = [];
 };
 
 addEmployee.onclick = () => {
+  arr = [];
+  console.log(arr);
   document.querySelector(".add-edit-heading").innerHTML = "Add Employee";
   document.querySelector(".add-update-text").innerHTML = "Add Employee Profile";
+  profilePhoto.setAttribute("src", "assets/images/add-profile-photo.svg");
+  err.forEach((errors) => {
+    errors.innerHTML = "Error Placeholder";
+    errors.classList.remove("visible");
+  });
   addForm.reset();
   overlay.classList.add("open");
   addEditEmployeeModal.classList.remove("close");
   addEditEmployeeModal.scrollTop = 0;
-  arr = [];
 };
 
-photoId.onchange = () => {
+photoId.oninput = () => {
   if (photoId.files[0]) {
     profilePhoto.style.borderRadius = "50%";
     profilePhoto.setAttribute("src", URL.createObjectURL(photoId.files[0]));
@@ -143,7 +151,7 @@ skillAddSearch.oninput = (e) => {
     addedSkills = [];
   }
   addedSkills = [...skillsArr];
-  console.log(addedSkills);
+  // console.log(addedSkills);
   addedSkills = addedSkills.filter((indSkill) =>
     indSkill.name.toLowerCase().includes(e.target.value.toLowerCase())
   );
@@ -152,8 +160,13 @@ skillAddSearch.oninput = (e) => {
 
 addSkillList.onclick = (e) => {
   if (e.target.tagName === "LI") {
+    if (indArr.length != 0) {
+      arr = indArr;
+    }
     if (!arr.includes(e.target.innerHTML)) {
+      console.log("array pushed ", e.target.innerHTML);
       arr.push(e.target.innerHTML);
+      console.log(("pushed array", arr));
       addSelectedSkills.classList.remove("close");
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
       skillAddSearch.value = "";
@@ -166,12 +179,25 @@ addSelectedSkills.onclick = (e) => {
     console.log("array", arr);
     console.log("indarr", indArr);
     if (indArr.length != 0) {
-      arr = indArr;
+      console.log("length of individual array is not 0");
+      // arr = indArr;
+      indArr.forEach((a) => {
+        if (!arr.includes(a)) arr.push(a);
+      });
+
+      // arr.push(indArr);
+      console.log("array after if ", arr);
     }
     if (arr.includes(e.target.parentNode.querySelector("p").innerHTML)) {
-      console.log("remove skills");
-      let index = arr.indexOf(e.target.parentNode.querySelector("p").innerHTML);
-      arr.splice(index, 1);
+      // console.log("remove skills");
+      let removeSkill = e.target.parentNode.querySelector("p").innerHTML;
+      let indexArr = arr.indexOf(removeSkill);
+      let indexInd = indArr.indexOf(removeSkill);
+      console.log(removeSkill);
+      arr.splice(indexArr, 1);
+      indArr.splice(indexInd, 1);
+      console.log("array after splicing", arr);
+      console.log("individual array after splicing", indArr);
       addSelectedSkills.innerHTML = "";
       if (arr.length == 0) {
         addSelectedSkills.innerHTML = "";
@@ -276,8 +302,9 @@ addForm.onsubmit = (e) => {
   // console.log(addUpdateBtn.innerText == "Add Employee Profile");
   if (submitValidator()) {
     // console.log(arr);
+    // let img = addEmployeeImage(photoId.files[0]);
     const date = new Date();
-    const data = {
+    let data = {
       fName: fname.value,
       lName: lname.value,
       department: dept.value,
@@ -288,11 +315,51 @@ addForm.onsubmit = (e) => {
       address: address.value,
       mobile: phoneNumber.value,
       department: dept.value,
-      skill: arr,
+      // skill: arr,
       email: email.value,
-      imageURL: "",
+      //imageURL: "",
     };
-    // console.log(actualData);
+
+    // uploadImage(photoId.files[0]).then((url) => {
+    //   data["imageURL"] = url;
+    //   if (arr.length == 0) {
+    //     data.skill = "";
+    //     console.log(data.skill);
+    //   } else {
+    //     data.skill = arr;
+    //   }
+    //   if (addUpdateBtn.innerText == "Add Employee Profile") {
+    //     let len = actualData.length;
+    //     if (!len) {  
+    //       userID = 1001;
+    //     } else {
+    //       userID = Number(actualData[len - 1].id) + 1;
+    //     }
+    //     console.log(userID);
+    //     createUser(data, userID);
+    //     alert("Login Successful. Hi " + fname.value);
+    //     arr = [];
+    //     addForm.reset();
+    //   } else {
+    //     // console.log("updated data", data, "for", editUserId);
+    //     // console.log("updated skills", data.skill);
+    //     updateUser(data, editUserId);
+    //     arr = [];
+    //     blank();
+    //     addForm.reset();
+    //   }
+
+    //   addEditEmployeeModal.classList.add("close");
+    //   overlay.classList.remove("open");
+    //   addSelectedSkills.innerHTML = "";
+    // });
+
+    if (arr.length == 0) {
+      data.skill = "";
+    } else {
+      data.skill = arr;
+    }
+
     if (addUpdateBtn.innerText == "Add Employee Profile") {
       let len = actualData.length;
       if (!len) {
@@ -300,14 +367,47 @@ addForm.onsubmit = (e) => {
       } else {
         userID = Number(actualData[len - 1].id) + 1;
       }
-      createUser(data, userID);
-      alert("Login Successful. Hi " + fname.value);
-      addForm.reset();
+      console.log(userID);
+
+      uploadImage(photoId.files[0]).then((url) => {
+        data["imageURL"] = url;
+        createUser(data, userID);
+        alert("Login Successful. Hi " + fname.value);
+        arr = [];
+        addForm.reset();
+      });
     } else {
-      console.log("updated data", data, "for", editUserId);
-      console.log("updated skills", data.skill);
+      if (photoId.files[0]) {
+        uploadImage(photoId.files[0]).then((url) => {
+          data["imageURL"] = url;
+          updateUser(data, editUserId);
+          arr = [];
+          blank();
+          addForm.reset();
+        });
+      } else {
+        updateUser(data, editUserId);
+        arr = [];
+        blank();
+        addForm.reset();
+      }
+      // console.log("updated data", data, "for", editUserId);
+      // console.log("updated skills", data.skill);
       updateUser(data, editUserId);
+      arr = [];
+      blank();
+      addForm.reset();
     }
+
+    addEditEmployeeModal.classList.add("close");
+    overlay.classList.remove("open");
+    addSelectedSkills.innerHTML = "";
+
+    // console.log(uploadImage(photoId.files[0]));
+
+    // console.log("data skill", data.skill);
+    // console.log(actualData);
+
     // let len = actualData.length;
     // if (!len) {
     //   userID = 1001;
@@ -317,13 +417,11 @@ addForm.onsubmit = (e) => {
     // createUser(data, userID);
     // alert("Login Successful. Hi " + fname.value);
     // addForm.reset();
-    addEditEmployeeModal.classList.add("close");
-    overlay.classList.remove("open");
-    addSelectedSkills.innerHTML = "";
-    err.forEach((errors) => {
-      errors.innerHTML = "Error Placeholder";
-      errors.classList.remove("visible");
-    });
+
+    // err.forEach((errors) => {
+    //   errors.innerHTML = "Error Placeholder";
+    //   errors.classList.remove("visible");
+    // });
   } else {
     // alert("failed");
   }
@@ -356,7 +454,7 @@ document.querySelector("table").onclick = (e) => {
       addEditEmployeeModal.classList.remove("close");
       overlay.classList.add("open");
     } else if (e.target.classList.contains("delete-btn")) {
-      console.log(e.target.parentElement.firstElementChild.dataset.employeeId);
+      // console.log(e.target.parentElement.firstElementChild.dataset.employeeId);
       confirmModal.classList.remove("close");
       overlay.classList.add("open");
       deleteButton.onclick = () => {

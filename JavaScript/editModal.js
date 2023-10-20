@@ -1,5 +1,10 @@
 import { getIndvData, individualdata } from "./firebase.js";
-import { addSelectedSkills, location, skillAddSearch } from "./index.js";
+import {
+  addSelectedSkills,
+  location,
+  profilePhoto,
+  // skillAddSearch,
+} from "./index.js";
 import {
   address,
   department,
@@ -11,13 +16,18 @@ import {
   role,
 } from "./validation.js";
 export let indArr = [];
+let individualSkill;
 
+export function blank() {
+  indArr = [];
+}
 export function editModal(empId) {
   indArr = [];
   getIndvData(empId);
   document.querySelector(".add-edit-heading").innerHTML = "Edit Employee";
   document.querySelector(".add-update-text").innerHTML =
     "Update Employee Profile";
+  profilePhoto.src = individualdata.imageURL;
   fname.value = individualdata.fName;
   lname.value = individualdata.lName;
   role.value = individualdata.role;
@@ -27,12 +37,18 @@ export function editModal(empId) {
   dob.value = individualdata.dob;
   phoneNumber.value = individualdata.mobile;
   address.value = individualdata.address;
-  individualdata.skill.forEach((element) => {
-    indArr.push(element);
-    addSelectedSkills.classList.remove("close");
-    addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${element}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
-  });
-  //   indArr = [];
+  individualSkill = individualdata.skill;
+  if (individualSkill == "") {
+    addSelectedSkills.innerHTML = "";
+  } else {
+    individualSkill.forEach((element) => {
+      indArr.push(element);
+      addSelectedSkills.classList.remove("close");
+      addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${element}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
+    });
+  }
+
+  //indArr = [];
 
   //   addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
 }

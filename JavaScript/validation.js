@@ -103,10 +103,6 @@ function blankValidator(inputField) {
 }
 
 export function submitValidator() {
-  // err.forEach((errors) => {
-  //   errors.innerHTML = "Error hoho";
-  //   errors.classList.remove("visible");
-  // });
   if (
     firstNameValidator() &&
     lastNameValidator() &&

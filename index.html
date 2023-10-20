@@ -22,6 +22,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+    <link rel="icon" type="image/x-icon" href="./assets/images/fav-icon.svg" />
   </head>
   <body>
     <header>
@@ -146,6 +147,13 @@
           src="assets/images/close-icon.svg"
           alt="close-icon"
         />
+        
+
+        <form
+          class="add-edit-employee-form flex-column"
+          novalidate
+          autocomplete="off"
+        >
         <div class="add-edit-employee-head flex-column">
           <div class="">
             <label for="photo-id"
@@ -154,21 +162,10 @@
                 src="assets/images/add-profile-photo.svg"
                 alt="add-profile-icon"
             /></label>
-            <input
-              class="profile-photo close"
-              type="file"
-              id="photo-id"
-              accept="image/*"
-            />
+            <input class="close" type="file" id="photo-id" accept="image/*" />
           </div>
           <h2 class="add-edit-heading">Add Employee</h2>
         </div>
-
-        <form
-          class="add-edit-employee-form flex-column"
-          novalidate
-          autocomplete="off"
-        >
           <div class="flex-row details">
             <div class="flex-column field-space">
               <div class="flex-column">
@@ -314,10 +311,12 @@
 
       <section class="view-employee-modal flex-row close">
         <div class="flex-column left-bar">
-          <span class="profile-photo-circle"></span>
+          <span class="profile-photo-circle"
+            ><img class="profile-photo-view" src=""
+          /></span>
           <p class="emp-id-display"></p>
           <p class="dept-display"></p>
-          <p class="emailID-display"></p>
+          <p class="working-location-display"></p>
         </div>
         <div class="flex-row right-bar">
           <div class="flex-column personal-details">
@@ -328,7 +327,7 @@
             <p class="doj-display"></p>
             <p class="dob-display"></p>
             <p class="phone-no-display"></p>
-            <p class="working-location-display"></p>
+            <p class="emailID-display"></p>
             <div class="address-display-container flex-row">
               <label for="address-display">Address:&nbsp;</label>
               <div class="address-display" readonly></div>
@@ -357,9 +356,7 @@
         </p>
         <div class="flex-row confirm-modal-btns">
           <button class="cancel-button" type="button">Cancel</button>
-          <button class="delete-button" type="button">
-            Delete
-          </button>
+          <button class="delete-button" type="button">Delete</button>
         </div>
       </section>
     </main>

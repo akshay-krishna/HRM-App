@@ -1,6 +1,6 @@
 // import { skillAdd } from "./list.js";
 
-import { alterTable, filterArr, searchFilter, selected } from "./list.js";
+import { alterTable,  searchFilter, selected } from "./list.js";//filterArr
 
 export function renderTable(dataArr) {
   // document.querySelector(".arrow").src = "assets/images/sort-initial-icon.svg";

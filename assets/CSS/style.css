@@ -402,6 +402,7 @@ tr:nth-child(even):hover {
   height: 150px;
   cursor: pointer;
   padding: 10px;
+  border-radius: 50%;
 }
 
 .add-edit-employee-form {
@@ -571,6 +572,13 @@ tr:nth-child(even):hover {
   width: 150px;
   border-radius: 50%;
   background-color: var(--white);
+  overflow: clip;
+}
+
+.profile-photo-circle .profile-photo-view {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .right-bar {
