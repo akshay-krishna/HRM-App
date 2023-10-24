@@ -97,7 +97,7 @@ overlay.onclick = () => {
   skillList.classList.add("close");
   document
     .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/avatar.svg");
+    .setAttribute("src", "assets/images/loader.gif");
   viewEmployeeModal.classList.add("close");
   addRoleList.classList.add("close");
   addDeptList.classList.add("close");
@@ -412,6 +412,9 @@ addForm.onsubmit = (e) => {
 };
 
 function viewModal(id) {
+  document
+    .querySelector(".profile-photo-view")
+    .setAttribute("src", "assets/images/loader.gif");
   viewEmployeeModal.classList.remove("close");
   displayDetails(id);
 }
@@ -419,7 +422,7 @@ function viewModal(id) {
 closeView.onclick = () => {
   document
     .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/avatar.svg");
+    .setAttribute("src", "assets/images/loader.gif");
   viewEmployeeModal.classList.add("close");
   overlay.classList.remove("open");
 };
