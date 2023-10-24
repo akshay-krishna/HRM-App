@@ -149,6 +149,8 @@ skillAddSearch.onfocus = () => {
     skillsArr = dataArr;
     renderSkills(dataArr);
   });
+  console.log("array when focused", arr);
+  console.log("indv array when focused", indArr);
 };
 
 skillAddSearch.oninput = (e) => {
@@ -360,6 +362,7 @@ addForm.onsubmit = (e) => {
         toastText.innerHTML = "Employee details added successfully";
         toast.classList.add("show");
         arr = [];
+        blank();
         removeShow();
         addForm.reset();
       });
