@@ -41,7 +41,7 @@ let individualSkill;
 //     });
 //   }
 // }
-const loader = document.getElementById("loader");
+const loader = document.querySelector(".loader");
 
 export async function displayDetails(id) {
   // Show the loader while data is being fetched

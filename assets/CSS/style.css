@@ -35,6 +35,18 @@
   } /* Spin the loader 360 degrees */
 }
 
+.toast {
+  background-color: var(--eucalyptus);
+  color: var(--light-green);
+  padding: 10px;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  border-radius: 7px;
+  opacity: 1;
+  transition: 0.5s;
+}
+
 :root {
   --eucalyptus: #27ae60;
   --light-green: #e1ffee;

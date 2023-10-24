@@ -95,9 +95,6 @@ overlay.onclick = () => {
   overlay.classList.remove("open");
   skillList.scrollTop = 0;
   skillList.classList.add("close");
-  document
-    .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/loader.gif");
   viewEmployeeModal.classList.add("close");
   addRoleList.classList.add("close");
   addDeptList.classList.add("close");
@@ -162,6 +159,7 @@ skillAddSearch.oninput = (e) => {
 };
 
 addSkillList.onclick = (e) => {
+  console.log("skills selected");
   if (e.target.tagName === "LI") {
     if (indArr.length != 0) {
       arr = [...indArr];
@@ -169,12 +167,15 @@ addSkillList.onclick = (e) => {
     if (!arr.includes(e.target.innerHTML)) {
       console.log("array pushed ", e.target.innerHTML);
       arr.push(e.target.innerHTML);
+      indArr.push(e.target.innerHTML)
       console.log(("pushed array", arr));
       addSelectedSkills.classList.remove("close");
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
       skillAddSearch.value = "";
     }
   }
+  console.log(indArr, " ind arr inside addskillllist");
+  console.log(arr, " arr inside addskilllist onclick");
 };
 
 addSelectedSkills.onclick = (e) => {
@@ -309,6 +310,7 @@ addForm.onsubmit = (e) => {
   if (indArr.length != 0) {
     arr = [...indArr];
   }
+  console.log("arr after spread suibmit", arr);
   e.preventDefault();
   // console.log(addUpdateBtn.innerText == "Add Employee Profile");
   if (submitValidator()) {
@@ -409,15 +411,12 @@ addForm.onsubmit = (e) => {
 function viewModal(id) {
   document
     .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/loader.gif");
+    .setAttribute("src", "assets/images/avatar.svg");
   viewEmployeeModal.classList.remove("close");
   displayDetails(id);
 }
 
 closeView.onclick = () => {
-  document
-    .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/loader.gif");
   viewEmployeeModal.classList.add("close");
   overlay.classList.remove("open");
 };
