@@ -95,6 +95,9 @@ overlay.onclick = () => {
   overlay.classList.remove("open");
   skillList.scrollTop = 0;
   skillList.classList.add("close");
+  document
+    .querySelector(".profile-photo-view")
+    .setAttribute("src", "assets/images/avatar.svg");
   viewEmployeeModal.classList.add("close");
   addRoleList.classList.add("close");
   addDeptList.classList.add("close");
@@ -167,7 +170,7 @@ addSkillList.onclick = (e) => {
     if (!arr.includes(e.target.innerHTML)) {
       console.log("array pushed ", e.target.innerHTML);
       arr.push(e.target.innerHTML);
-      indArr.push(e.target.innerHTML)
+      indArr.push(e.target.innerHTML);
       console.log(("pushed array", arr));
       addSelectedSkills.classList.remove("close");
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
@@ -409,14 +412,14 @@ addForm.onsubmit = (e) => {
 };
 
 function viewModal(id) {
-  document
-    .querySelector(".profile-photo-view")
-    .setAttribute("src", "assets/images/avatar.svg");
   viewEmployeeModal.classList.remove("close");
   displayDetails(id);
 }
 
 closeView.onclick = () => {
+  document
+    .querySelector(".profile-photo-view")
+    .setAttribute("src", "assets/images/avatar.svg");
   viewEmployeeModal.classList.add("close");
   overlay.classList.remove("open");
 };
