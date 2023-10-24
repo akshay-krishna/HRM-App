@@ -106,4 +106,3 @@ export function alterTable() {
   resetSortIconToDefault();
   renderTable(filterArray);
 }
-

@@ -47,7 +47,7 @@ export function editModal(empId) {
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${element}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
     });
   }
-
+  console.log(indArr);
   //indArr = [];
 
   //   addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;

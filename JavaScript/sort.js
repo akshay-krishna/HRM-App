@@ -1,7 +1,7 @@
 import { renderTable } from "./UI.js";
 import { actualData } from "./index.js";
 import { arrow } from "./index.js";
-import { filterArray } from "./list.js";//filterArr
+import { filterArray } from "./list.js"; //filterArr
 let prevColumn = "";
 let flag = 1;
 const headers = document.querySelectorAll("th");

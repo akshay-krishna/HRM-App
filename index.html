@@ -147,25 +147,24 @@
           src="assets/images/close-icon.svg"
           alt="close-icon"
         />
-        
 
         <form
           class="add-edit-employee-form flex-column"
           novalidate
           autocomplete="off"
         >
-        <div class="add-edit-employee-head flex-column">
-          <div class="">
-            <label for="photo-id"
-              ><img
-                class="add-edit-profile-photo"
-                src="assets/images/add-profile-photo.svg"
-                alt="add-profile-icon"
-            /></label>
-            <input class="close" type="file" id="photo-id" accept="image/*" />
+          <div class="add-edit-employee-head flex-column">
+            <div class="">
+              <label for="photo-id"
+                ><img
+                  class="add-edit-profile-photo"
+                  src="assets/images/add-profile-photo.svg"
+                  alt="add-profile-icon"
+              /></label>
+              <input class="close" type="file" id="photo-id" accept="image/*" />
+            </div>
+            <h2 class="add-edit-heading">Add Employee</h2>
           </div>
-          <h2 class="add-edit-heading">Add Employee</h2>
-        </div>
           <div class="flex-row details">
             <div class="flex-column field-space">
               <div class="flex-column">
@@ -312,7 +311,7 @@
       <section class="view-employee-modal flex-row close">
         <div class="flex-column left-bar">
           <span class="profile-photo-circle"
-            ><img class="profile-photo-view" src=""
+            ><img class="profile-photo-view" src="assets/images/loader.gif"
           /></span>
           <p class="emp-id-display"></p>
           <p class="dept-display"></p>
@@ -359,6 +358,7 @@
           <button class="delete-button" type="button">Delete</button>
         </div>
       </section>
+      <div id="loader" class="loader"></div>
     </main>
 
     <script type="module" src="./JavaScript/index.js"></script>
