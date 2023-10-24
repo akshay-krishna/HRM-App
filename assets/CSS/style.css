@@ -36,15 +36,26 @@
 }
 
 .toast {
-  background-color: var(--eucalyptus);
-  color: var(--light-green);
+  box-sizing: border-box;
+  border: 1px solid var(--eucalyptus);
+  background-color: var(--light-green);
+  color: var(--eucalyptus);
+  font-weight: 700;
+  /* white-space: nowrap; */
   padding: 10px;
   position: fixed;
-  top: 10px;
-  right: 10px;
   border-radius: 7px;
-  opacity: 1;
-  transition: 0.5s;
+  z-index: 100;
+  transition: all ease-in-out 1s;
+  width: 350px;
+  top: 20%;
+  right: 0;
+  transform: translateX(calc(100% + 10px));
+}
+
+.toast.show {
+  transform: translateX(-20px);
+  transition: all ease-in-out 1s;
 }
 
 :root {
@@ -625,7 +636,7 @@ tr:nth-child(even):hover {
 .profile-photo-circle .profile-photo-view {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .right-bar {
@@ -676,12 +687,12 @@ tr:nth-child(even):hover {
   border: none;
   resize: none;
   padding: 0;
-  overflow-x: scroll;
+  overflow-x: auto;
   height: 70px;
 }
 
 .address-display-container {
-  overflow: auto;
+  /* overflow: auto; */
   box-sizing: border-box;
 }
 

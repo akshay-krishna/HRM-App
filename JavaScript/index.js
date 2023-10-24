@@ -61,6 +61,8 @@ const cancelButton = document.querySelector(".cancel-button");
 const addForm = document.querySelector(".add-edit-employee-form");
 const err = document.querySelectorAll(".err");
 const addUpdateBtn = document.querySelector(".add-update-btn");
+const toast = document.querySelector(".toast");
+const toastText = document.querySelector(".toast-text");
 export let arrow;
 export let actualData = [];
 let arr = [];
@@ -354,8 +356,11 @@ addForm.onsubmit = (e) => {
       uploadImage(photoId.files[0]).then((url) => {
         data["imageURL"] = url;
         createUser(data, userID);
-        alert("Login Successful. Hi " + fname.value);
+        // alert("Login Successful. Hi " + fname.value);
+        toastText.innerHTML = "Employee details added successfully";
+        toast.classList.add("show");
         arr = [];
+        removeShow();
         addForm.reset();
       });
     } else if (addUpdateBtn.innerText == "Update Employee Profile") {
@@ -364,15 +369,21 @@ addForm.onsubmit = (e) => {
           data["imageURL"] = url;
           console.log("updated skills with foto change", data.skill);
           updateUser(data, editUserId);
+          toastText.innerHTML = "Employee details updated successfully";
+          toast.classList.add("show");
           arr = [];
           blank();
+          removeShow();
           addForm.reset();
         });
       } else {
         console.log("updated skills without foto change", data.skill);
         updateUser(data, editUserId);
+        toastText.innerHTML = "Employee details updated successfully";
         arr = [];
         blank();
+        toast.classList.add("show");
+        removeShow();
         addForm.reset();
       }
       // console.log("updated data", data, "for", editUserId);
@@ -386,6 +397,12 @@ addForm.onsubmit = (e) => {
     addEditEmployeeModal.classList.add("close");
     overlay.classList.remove("open");
     addSelectedSkills.innerHTML = "";
+
+    // addEditEmployeeModal.classList.add("close");
+    // overlay.classList.remove("open");
+    // addSelectedSkills.innerHTML = "";
+    // toastText.innerHTML = "";
+    // toast.classList.add("close");
 
     // console.log(uploadImage(photoId.files[0]));
 
@@ -496,3 +513,9 @@ cancelButton.onclick = () => {
 //   overlay.classList.remove("open");
 //   addSelectedSkills.innerHTML = "";
 // });
+
+function removeShow() {
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2000);
+}

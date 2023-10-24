@@ -24,6 +24,7 @@ export function blank() {
 export function editModal(empId) {
   indArr = [];
   getIndvData(empId);
+  document.getElementById("photo-id").src = "assets/images/loader.gif";
   document.querySelector(".add-edit-heading").innerHTML = "Edit Employee";
   document.querySelector(".add-update-text").innerHTML =
     "Update Employee Profile";
