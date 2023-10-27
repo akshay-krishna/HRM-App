@@ -1,12 +1,7 @@
-// import { skillAdd } from "./list.js";
-
 import { alterTable, searchFilter, selected } from "./list.js"; //filterArr
 
 export function renderTable(dataArr) {
-  // document.querySelector(".arrow").src = "assets/images/sort-initial-icon.svg";
-  // console.log("render table is called", dataArr);
   document.querySelector("tbody").innerHTML = "";
-  // console.log("render");
   const tableBody = document.querySelector("tbody");
   tableBody.querySelectorAll("tr").forEach((row) => row.remove());
   dataArr.forEach((data) => {
@@ -44,7 +39,6 @@ export function renderSkills(dataArr) {
     temp = `<li>${data.name}</li>`;
     document.querySelector(".skill-list").innerHTML += temp;
     document.querySelector(".add-skill-list").innerHTML += temp;
-    // skillAdd(dataArr);
   });
 }
 
@@ -76,7 +70,6 @@ export function renderLocation(dataArr) {
 }
 
 export function skillShow(dataName) {
-  // console.log("skill show iscalled");
   if (dataName == "") {
     searchFilter.innerHTML = "filter_alt";
     return;
@@ -87,6 +80,5 @@ export function skillShow(dataName) {
   selected.innerHTML += `<span class="individual-skills flex-row"><p>${dataName}</p><span class="material-symbols-outlined cancel">
       cancel
       </span></span>`;
-  // console.log(filterArr);
   alterTable();
 }

@@ -1,10 +1,5 @@
 import { getIndvData, individualdata } from "./firebase.js";
-import {
-  addSelectedSkills,
-  location,
-  profilePhoto,
-  // skillAddSearch,
-} from "./index.js";
+import { addSelectedSkills, location, profilePhoto } from "./index.js";
 import {
   address,
   department,
@@ -48,8 +43,4 @@ export function editModal(empId) {
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${element}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
     });
   }
-  console.log(indArr);
-  //indArr = [];
-
-  //   addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
 }

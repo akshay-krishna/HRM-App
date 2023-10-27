@@ -6,13 +6,11 @@ export const selected = document.querySelector(".selected-skills ");
 const skillUl = document.querySelector(".skill-list");
 export const searchFilter = document.querySelector(".search-filter");
 const filterShow = document.querySelector(".filter-search");
-// let filterData = [];
 let dataSkills = [];
 export let filterArray = [];
 
 skillUl.onclick = (e) => {
   if (e.target.tagName === "LI") {
-    // console.log(e.target.tagName);
     skillAdd(e.target);
   }
 };
@@ -89,8 +87,6 @@ filterShow.addEventListener("input", (e) => {
 });
 
 export function alterTable() {
-  // console.log("alter table iscalled");
-  // console.log("alterTable", userArr);
   filterArray = [...actualData];
   let searchValue = search.value;
   if(searchValue) {

@@ -18,7 +18,6 @@ import {
   uploadImage,
 } from "./firebase.js";
 import { alterTable } from "./list.js";
-// import { searchElement } from "./search.js";
 import { sortColumn } from "./sort.js";
 import {
   dob,
@@ -31,8 +30,6 @@ import {
 } from "./validation.js";
 import { displayDetails } from "./view.js";
 const overlay = document.querySelector(".overlay");
-// const close = document.querySelector(".close");
-// const open = document.querySelector(".open");
 export const search = document.getElementById("search");
 const searchForm = document.querySelector(".search-form");
 const addEditEmployeeModal = document.querySelector(".add-edit-employee-modal");
@@ -52,8 +49,6 @@ const filter = document.querySelector(".filter-search");
 const skillList = document.querySelector(".skill-list");
 export const addSelectedSkills = document.querySelector(".add-selected-skills");
 const deleteButton = document.querySelector(".delete-button");
-// const addSkillsRemove = document.querySelector(".add-skills-remove");
-// const table = document.querySelector("table");
 const viewEmployeeModal = document.querySelector(".view-employee-modal");
 const closeView = document.querySelector(".close-view-icon");
 const confirmModal = document.querySelector(".delete-update-modal");
@@ -72,7 +67,6 @@ export let editUserId;
 let userID;
 
 document.addEventListener("DOMContentLoaded", () => {
-  // console.log("dom content loaded");
   getUser((dataArr) => {
     actualData = dataArr;
     renderTable(dataArr);
@@ -121,7 +115,6 @@ closeAddEditModalIcon.onclick = () => {
 
 addEmployee.onclick = () => {
   arr = [];
-  console.log("INitial array", arr);
   document.querySelector(".add-edit-heading").innerHTML = "Add Employee";
   document.querySelector(".add-update-text").innerHTML = "Add Employee Profile";
   profilePhoto.setAttribute("src", "assets/images/add-profile-photo.svg");
@@ -149,8 +142,6 @@ skillAddSearch.onfocus = () => {
     skillsArr = dataArr;
     renderSkills(dataArr);
   });
-  console.log("array when focused", arr);
-  console.log("indv array when focused", indArr);
 };
 
 skillAddSearch.oninput = (e) => {
@@ -158,7 +149,6 @@ skillAddSearch.oninput = (e) => {
     addedSkills = [];
   }
   addedSkills = [...skillsArr];
-  // console.log(addedSkills);
   addedSkills = addedSkills.filter((indSkill) =>
     indSkill.name.toLowerCase().includes(e.target.value.toLowerCase())
   );
@@ -166,53 +156,33 @@ skillAddSearch.oninput = (e) => {
 };
 
 addSkillList.onclick = (e) => {
-  console.log("skills selected");
   if (e.target.tagName === "LI") {
     if (indArr.length != 0) {
       arr = [...indArr];
     }
     if (!arr.includes(e.target.innerHTML)) {
-      console.log("array pushed ", e.target.innerHTML);
       arr.push(e.target.innerHTML);
       indArr.push(e.target.innerHTML);
-      console.log(("pushed array", arr));
       addSelectedSkills.classList.remove("close");
       addSelectedSkills.innerHTML += `<div class="individual-skills flex-row"><p>${e.target.innerHTML}</p><span class="material-symbols-outlined add-skills-remove">cancel</span></div>`;
       skillAddSearch.value = "";
     }
   }
-  console.log(indArr, " ind arr inside addskillllist");
-  console.log(arr, " arr inside addskilllist onclick");
 };
 
 addSelectedSkills.onclick = (e) => {
   if (e.target.classList.contains("add-skills-remove")) {
-    console.log("array before if", arr);
-    console.log("indarr after if", indArr);
     if (indArr.length != 0) {
-      console.log("length of individual array is not 0");
-      // arr = indArr;
       indArr.forEach((a) => {
         if (!arr.includes(a)) arr.push(a);
       });
-
-      // arr.push(indArr);
-      console.log("array after if ", arr);
     }
     if (arr.includes(e.target.parentNode.querySelector("p").innerHTML)) {
-      // console.log("remove skills");
       let removeSkill = e.target.parentNode.querySelector("p").innerHTML;
       let indexArr = arr.indexOf(removeSkill);
-      console.log("index of arr", indexArr);
       let indexInd = indArr.indexOf(removeSkill);
-      console.log("index of ind", indexInd);
-      console.log("skill to remove", removeSkill);
-      console.log("array before splicing", arr);
-      console.log("individual array before splicing", indArr);
-      console.log("splicing arr", arr.splice(indexArr, 1));
-      console.log("splicing ind arr ", indArr.splice(indexInd, 1));
-      console.log("array after splicing", arr);
-      console.log("individual array after splicing", indArr);
+      arr.splice(indexArr, 1);
+      indArr.splice(indexInd, 1);
       addSelectedSkills.innerHTML = "";
       if (arr.length == 0) {
         addSelectedSkills.innerHTML = "";
@@ -295,13 +265,11 @@ location.onblur = () => {
 };
 
 filter.addEventListener("focus", () => {
-  // console.log("on focusd");
   skillList.classList.remove("close");
   getSkills((dataArr) => {
     skillsArr = dataArr;
     renderSkills(dataArr);
   });
-  // overlay.classList.add("open");
 });
 
 filter.addEventListener("blur", (e) => {
@@ -313,16 +281,11 @@ filter.addEventListener("blur", (e) => {
 });
 
 addForm.onsubmit = (e) => {
-  console.log("on submit array=", arr);
   if (indArr.length != 0) {
     arr = [...indArr];
   }
-  console.log("arr after spread suibmit", arr);
   e.preventDefault();
-  // console.log(addUpdateBtn.innerText == "Add Employee Profile");
   if (submitValidator()) {
-    console.log(arr);
-    // let img = addEmployeeImage(photoId.files[0]);
     const date = new Date();
     let data = {
       fName: fname.value,
@@ -335,9 +298,7 @@ addForm.onsubmit = (e) => {
       address: address.value,
       mobile: phoneNumber.value,
       department: dept.value,
-      // skill: arr,
       email: email.value,
-      //imageURL: "",
     };
 
     if (arr.length == 0) {
@@ -353,12 +314,10 @@ addForm.onsubmit = (e) => {
       } else {
         userID = Number(actualData[len - 1].id) + 1;
       }
-      console.log(userID);
 
       uploadImage(photoId.files[0]).then((url) => {
         data["imageURL"] = url;
         createUser(data, userID);
-        // alert("Login Successful. Hi " + fname.value);
         toastText.innerHTML = "Employee details added successfully";
         toast.classList.add("show");
         arr = [];
@@ -370,7 +329,6 @@ addForm.onsubmit = (e) => {
       if (photoId.files[0]) {
         uploadImage(photoId.files[0]).then((url) => {
           data["imageURL"] = url;
-          console.log("updated skills with foto change", data.skill);
           updateUser(data, editUserId);
           toastText.innerHTML = "Employee details updated successfully";
           toast.classList.add("show");
@@ -380,7 +338,6 @@ addForm.onsubmit = (e) => {
           addForm.reset();
         });
       } else {
-        console.log("updated skills without foto change", data.skill);
         updateUser(data, editUserId);
         toastText.innerHTML = "Employee details updated successfully";
         arr = [];
@@ -389,8 +346,6 @@ addForm.onsubmit = (e) => {
         removeShow();
         addForm.reset();
       }
-      // console.log("updated data", data, "for", editUserId);
-      // console.log("updated skills", data.skill);
       updateUser(data, editUserId);
       arr = [];
       blank();
@@ -400,34 +355,6 @@ addForm.onsubmit = (e) => {
     addEditEmployeeModal.classList.add("close");
     overlay.classList.remove("open");
     addSelectedSkills.innerHTML = "";
-
-    // addEditEmployeeModal.classList.add("close");
-    // overlay.classList.remove("open");
-    // addSelectedSkills.innerHTML = "";
-    // toastText.innerHTML = "";
-    // toast.classList.add("close");
-
-    // console.log(uploadImage(photoId.files[0]));
-
-    // console.log("data skill", data.skill);
-    // console.log(actualData);
-
-    // let len = actualData.length;
-    // if (!len) {
-    //   userID = 1001;
-    // } else {
-    //   userID = Number(actualData[len - 1].id) + 1;
-    // }
-    // createUser(data, userID);
-    // alert("Login Successful. Hi " + fname.value);
-    // addForm.reset();
-
-    // err.forEach((errors) => {
-    //   errors.innerHTML = "Error Placeholder";
-    //   errors.classList.remove("visible");
-    // });
-  } else {
-    // alert("failed");
   }
 };
 
@@ -448,14 +375,11 @@ closeView.onclick = () => {
 };
 
 document.querySelector("table").onclick = (e) => {
-  // console.log(e.target, e.target.closest("div"));
   if (e.target.tagName === "TD") {
-    // console.log(e.target.parentElement.dataset.employeeId);
     viewModal(e.target.parentElement.dataset.employeeId);
     overlay.classList.add("open");
   } else if (e.target.closest("div").dataset.column) {
     arrow = e.target.closest("div").querySelector(".arrow");
-    // console.log(e.target, arrow);
     sortColumn(e.target.closest("div").dataset.column);
   } else if (e.target.tagName === "IMG") {
     if (e.target.classList.contains("edit-btn")) {
@@ -465,7 +389,6 @@ document.querySelector("table").onclick = (e) => {
       addEditEmployeeModal.classList.remove("close");
       overlay.classList.add("open");
     } else if (e.target.classList.contains("delete-btn")) {
-      // console.log(e.target.parentElement.firstElementChild.dataset.employeeId);
       confirmModal.classList.remove("close");
       overlay.classList.add("open");
       deleteButton.onclick = () => {
@@ -478,44 +401,9 @@ document.querySelector("table").onclick = (e) => {
 };
 
 cancelButton.onclick = () => {
-  // console.log("canceled");
   overlay.classList.remove("open");
   confirmModal.classList.add("close");
 };
-
-// uploadImage(photoId.files[0]).then((url) => {
-//   data["imageURL"] = url;
-//   if (arr.length == 0) {
-//     data.skill = "";
-//     console.log(data.skill);
-//   } else {
-//     data.skill = arr;
-//   }
-//   if (addUpdateBtn.innerText == "Add Employee Profile") {
-//     let len = actualData.length;
-//     if (!len) {
-//       userID = 1001;
-//     } else {
-//       userID = Number(actualData[len - 1].id) + 1;
-//     }
-//     console.log(userID);
-//     createUser(data, userID);
-//     alert("Login Successful. Hi " + fname.value);
-//     arr = [];
-//     addForm.reset();
-//   } else {
-//     // console.log("updated data", data, "for", editUserId);
-//     // console.log("updated skills", data.skill);
-//     updateUser(data, editUserId);
-//     arr = [];
-//     blank();
-//     addForm.reset();
-//   }
-
-//   addEditEmployeeModal.classList.add("close");
-//   overlay.classList.remove("open");
-//   addSelectedSkills.innerHTML = "";
-// });
 
 function removeShow() {
   setTimeout(() => {

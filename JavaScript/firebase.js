@@ -47,18 +47,15 @@ export function getUser(callback) {
           ...data[key],
         };
         if (filterArr) {
-          // console.log(obj.skill.includes("JS"));
           userArr.push(obj);
         } else {
           filterArr.forEach((element) => {
-            // console.log(element);
             if (obj.skill.includes(element)) {
               userArr.push(obj);
             }
           });
         }
       }
-      // console.log(userArr);
       callback(userArr);
     } else {
       callback([]);
@@ -80,7 +77,6 @@ export function getSkills(callback) {
         dataArr.push(obj);
       }
       callback(dataArr);
-      // console.log(dataArr);
     } else {
       callback([]);
     }
@@ -164,19 +160,12 @@ export async function getIndvData(id) {
   let indvRef = ref(db, "employee/" + id);
   onValue(indvRef, (snapshot) => {
     individualdata = snapshot.val();
-    if (individualdata) {
-      // console.log("data inside getindvdata ", individualdata);
-    } else {
-      // console.log("No data found");
-    }
   });
 }
 
 export const uploadImage = (file) => {
   try {
-    // console.log(file);
     if (!file) {
-      console.log("no file uploaded");
       return Promise.resolve(
         "https://firebasestorage.googleapis.com/v0/b/hr-management-app-8caae.appspot.com/o/avatar.svg?alt=media&token=0639e6c3-720b-4c13-bd81-2dd70b4b5f56"
       );
@@ -184,17 +173,9 @@ export const uploadImage = (file) => {
     const storage = getStorage();
     const storageRef = strRef(storage, crypto.randomUUID());
     return uploadBytes(storageRef, file).then((snapshot) => {
-      // console.log(snapshot);
       return getDownloadURL(snapshot.ref);
     });
   } catch (err) {
-    console.log("fail image", err);
+    console.log(err);
   }
 };
-
-// export const addEmployeeImage = async (file) => {
-//   // console.log(await uploadImage(file));
-//   data.imageURL = await uploadImage(file);
-//   console.log(data.imgURL);
-// };
-// empData.imgURL = await uploadImage(file)

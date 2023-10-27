@@ -4,11 +4,7 @@ export const lname = document.getElementById("lname");
 const lnameError = document.getElementById("lname-error");
 export const email = document.getElementById("email");
 const emailError = document.getElementById("email-error");
-// const submit = document.getElementById("submit");
 const addForm = document.querySelector(".add-edit-employee-form");
-// const addEditEmployeeModal = document.querySelector(".add-edit-employee-modal");
-// const overlay = document.querySelector(".overlay");
-// const close = document.querySelector(".close-add-edit-icon");
 export const role = document.getElementById("role");
 export const department = document.getElementById("department");
 const location = document.getElementById("location");
@@ -17,8 +13,6 @@ export const phoneNumber = document.getElementById("phone-number");
 const phoneErr = document.getElementById("phone-error");
 export const address = document.getElementById("address");
 const err = document.querySelectorAll(".err");
-// const skillAddSearch = document.getElementById("skill-add-search");
-// const handleClose = document.querySelector(".close-add-edit-icon");
 
 function firstNameValidator() {
   let text = "";
@@ -55,17 +49,13 @@ function lastNameValidator() {
 }
 
 function emailValidator() {
-  console.log("email validator");
   let text = "";
   const validEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
   if (email.value == "") {
-    console.log("inside blank check");
     text = "The field cant be blank";
   } else if (!validEmail.test(email.value)) {
-    console.log("inside format check");
     text = "Email should be in the correct format";
   } else {
-    console.log("inside else ie correct email");
     text = "";
     emailError.innerHTML = "Error placeholder";
     emailError.classList.remove("visible");
@@ -145,12 +135,3 @@ dob.onfocus = () => {
     currentDate.getMonth() + 1
   }-${currentDate.getDate()}`;
 };
-
-// close.onclick = () => {
-//   console.log("Before foreach");
-//   err.forEach((errors) => {
-//     console.log("hohoh");
-//     errors.innerHTML = "Error hoho";
-//     errors.classList.remove("visible");
-//   });
-// };

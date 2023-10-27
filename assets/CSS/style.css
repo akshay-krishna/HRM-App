@@ -41,7 +41,6 @@
   background-color: var(--light-green);
   color: var(--eucalyptus);
   font-weight: 700;
-  /* white-space: nowrap; */
   padding: 10px;
   position: fixed;
   border-radius: 7px;

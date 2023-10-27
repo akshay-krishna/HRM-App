@@ -1,7 +1,7 @@
 import { renderTable } from "./UI.js";
 import { actualData } from "./index.js";
 import { arrow } from "./index.js";
-import { filterArray } from "./list.js"; //filterArr
+import { filterArray } from "./list.js";
 let prevColumn = "";
 let flag = 1;
 const headers = document.querySelectorAll("th");
@@ -18,7 +18,6 @@ export function sortColumn(columnType) {
     arrayToSort = [...filterArray];
   }
   arrayToSort.sort((a, b) => {
-    // console.log(a, " ghegdghf ", b);
     if (a[columnType].toLowerCase() < b[columnType].toLowerCase()) {
       return -1 * flag;
     } else if (a[columnType].toLowerCase() > b[columnType].toLowerCase()) {
@@ -36,7 +35,5 @@ export function sortColumn(columnType) {
     }
   });
   flag = flag * -1;
-  // console.table(arrayToSort, "sorted");
-  // console.table(actualData, "actual data");
   renderTable(arrayToSort);
 }
