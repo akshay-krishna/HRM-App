@@ -1,9 +1,66 @@
 /* common class */
+/* CSS for the loader */
+.loader {
+  display: none; /* Hidden by default */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.7); /* Semi-transparent background */
+  z-index: 9999; /* Make it appear on top of other elements */
+}
+
+.loader::after {
+  content: ""; /* Empty content */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-top: -25px; /* Half of the height of your loader */
+  margin-left: -25px; /* Half of the width of your loader */
+  border: 5px solid #3498db; /* Loader color */
+  border-top: 5px solid transparent; /* Transparent border on top */
+  border-radius: 50%; /* Makes it a circle */
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite; /* Animation */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  } /* Spin the loader 360 degrees */
+}
+
+.toast {
+  box-sizing: border-box;
+  border: 1px solid var(--eucalyptus);
+  background-color: var(--light-green);
+  color: var(--eucalyptus);
+  font-weight: 700;
+  padding: 10px;
+  position: fixed;
+  border-radius: 7px;
+  z-index: 100;
+  transition: all ease-in-out 1s;
+  width: 350px;
+  top: 20%;
+  right: 0;
+  transform: translateX(calc(100% + 10px));
+}
+
+.toast.show {
+  transform: translateX(-20px);
+  transition: all ease-in-out 1s;
+}
 
 :root {
   --eucalyptus: #27ae60;
   --light-green: #e1ffee;
-  --white: #fff;
+  --white: #f9f5f0;
   --red: #ff6262;
   --hover-color: #8bd39e;
 }
@@ -15,6 +72,7 @@
 
 body {
   font-family: "Inter", sans-serif;
+  background-color: var(--white);
 }
 
 main {
@@ -68,6 +126,16 @@ p {
   display: none;
 }
 
+.arrow.close {
+  display: block;
+  visibility: hidden;
+}
+
+.arrow {
+  display: block;
+  visibility: visible;
+}
+
 .overlay.open {
   height: 100%;
   width: 100%;
@@ -79,6 +147,24 @@ p {
   z-index: 2;
 }
 
+li {
+  padding: 20px 5px;
+  border-bottom: 1px solid var(--eucalyptus);
+  font-size: 14px;
+  font-weight: 500;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+  cursor: pointer;
+}
+
+li:hover {
+  background-color: var(--hover-color);
+  border-radius: 0;
+}
+
+.skill-list li:nth-child(even):hover {
+  background-color: var(--hover-color);
+}
 /* header */
 
 header {
@@ -100,31 +186,33 @@ h1 {
   position: relative;
 }
 
+.search-submit {
+  position: absolute;
+  right: 13px;
+  top: 14px;
+  border: none;
+  background-color: var(--white);
+  cursor: pointer;
+}
+
 #search {
-  width: 450px;
+  width: 250px;
   height: 60px;
   background-color: var(--white);
   border: none;
   border-radius: 7px;
   padding-left: 10px;
+  padding-right: 45px;
+  font-size: 14px;
 }
 
 #search::placeholder {
   color: var(--eucalyptus);
   font-weight: 700;
-  font-size: 18px;
+  font-size: 14px;
   opacity: 1;
 }
 
-.search-submit {
-  position: absolute;
-  right: 13px;
-  top: 15px;
-  border: none;
-  background-color: var(--white);
-  padding: 0;
-  height: 32px;
-}
 /* form section */
 
 .add-filter-section {
@@ -139,11 +227,12 @@ h1 {
   border-radius: 7px;
 }
 
-.filter-btn {
-  width: 170px;
-  height: 60px;
-  gap: 10px;
-  cursor: pointer;
+.filter-search {
+  height: 100%;
+  width: 94%;
+  border: 1px solid var(--eucalyptus);
+  border-radius: 7px;
+  padding-left: 10px;
 }
 
 .add-employee-btn {
@@ -171,19 +260,33 @@ h1 {
 
 .filter {
   position: relative;
+  max-width: 238px;
+  height: 60px;
+}
+
+.filter .search-filter {
+  position: absolute;
+  right: 13px;
+  top: 15px;
+  color: var(--eucalyptus);
+  font-size: 30px;
+  padding: 0;
+  cursor: pointer;
 }
 
 .skill-list {
   list-style-type: none;
   position: absolute;
   padding-left: 0px;
-  top: 45px;
+  top: 46px;
   background-color: var(--white);
   border: 1px solid var(--eucalyptus);
   border-radius: 7px;
   width: 165px;
   cursor: pointer;
   z-index: 5;
+  overflow: auto;
+  max-height: 300px;
 }
 
 .skill-list li:nth-child(even) {
@@ -216,20 +319,45 @@ h1 {
   width: 20px;
 }
 
-li {
-  padding: 20px 5px;
-  border-bottom: 1px solid var(--eucalyptus);
-  font-size: 16px;
-  font-weight: 700;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
+.selected-skills {
+  white-space: nowrap;
+  overflow: auto;
+  padding: 10px 0;
+  gap: 10px;
 }
 
+.individual-skills {
+  gap: 10px;
+  align-items: center;
+  background-color: var(--white);
+  border-radius: 20px;
+  border: 1px solid var(--eucalyptus);
+  padding: 5px;
+}
+
+.individual-skills:nth-child(even) {
+  background-color: var(--light-green);
+}
+
+.individual-skills p {
+  font-size: 15px;
+}
+
+.cancel,
+.add-skills-remove {
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.cancel:hover,
+.add-skills-remove:hover {
+  transform: scale(0.8);
+}
 /*table*/
 
 table {
   width: 100%;
-  margin-top: 60px;
+  margin: 80px 0;
   border: 5px solid var(--eucalyptus);
 }
 
@@ -237,6 +365,7 @@ th {
   background-color: var(--eucalyptus);
   font-size: 18px;
   color: var(--white);
+  padding: 0;
 }
 
 td {
@@ -253,6 +382,9 @@ tr {
   border-bottom: 1px solid var(--eucalyptus);
   height: 60px;
   transition: 0.6s;
+}
+
+tbody tr {
   cursor: pointer;
 }
 
@@ -269,11 +401,15 @@ tr:nth-child(even):hover {
   background-color: var(--hover-color);
 }
 
-.ascending {
+.arrow {
+  transition: transform 0.5s;
+}
+.arrow-direction {
   height: 60px;
   align-items: center;
   gap: 5px;
   padding: 0 15px;
+  cursor: pointer;
 }
 
 .edit-delete-btn {
@@ -288,6 +424,7 @@ tr:nth-child(even):hover {
 }
 
 /* Add Employee modal */
+
 .close-add-edit-icon {
   align-self: flex-end;
   cursor: pointer;
@@ -306,7 +443,7 @@ tr:nth-child(even):hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--white);
   max-height: 80vh;
   overflow: auto;
   padding: 20px;
@@ -317,9 +454,12 @@ tr:nth-child(even):hover {
   align-items: center;
 }
 
-.add-profile-photo {
+.add-edit-profile-photo {
   width: 150px;
+  height: 150px;
   cursor: pointer;
+  padding: 10px;
+  border-radius: 50%;
 }
 
 .add-edit-employee-form {
@@ -330,12 +470,23 @@ tr:nth-child(even):hover {
 
 .details {
   justify-content: space-around;
+  margin: 0 20px;
 }
 
 .label-input {
   justify-content: space-between;
   align-items: center;
   gap: 30px;
+}
+
+.err {
+  visibility: hidden;
+  font-size: 10px;
+  color: red;
+}
+
+.err.visible {
+  visibility: visible;
 }
 
 .add-edit-employee-form label {
@@ -362,11 +513,23 @@ tr:nth-child(even):hover {
   gap: 50px;
 }
 
+.role-parent {
+  position: relative;
+}
+
+.department-parent {
+  position: relative;
+}
+
+.work-location-parent {
+  position: relative;
+}
+
 .skill-parent {
   position: relative;
 }
 
-.add-skill-list {
+.list-style {
   list-style-type: none;
   position: absolute;
   padding-left: 0px;
@@ -376,10 +539,27 @@ tr:nth-child(even):hover {
   border-radius: 7px;
   width: 165px;
   right: 147px;
+  z-index: 10;
+  max-height: 250px;
+  overflow: auto;
 }
 
-.add-skill-list li:nth-child(odd) {
+.list-style li:nth-child(even) {
   background-color: var(--light-green);
+}
+
+.list-style li:nth-child(even):hover {
+  background-color: var(--hover-color);
+}
+
+.add-selected-skills {
+  position: absolute;
+  width: 300px;
+  overflow: auto;
+  white-space: nowrap;
+  overflow: auto;
+  padding: 10px 0;
+  gap: 10px;
 }
 
 .add-update-btn {
@@ -388,7 +568,7 @@ tr:nth-child(even):hover {
   color: var(--white);
   font-weight: 700;
   cursor: pointer;
-  width: 200px;
+  width: 210px;
   height: 45px;
   border-radius: 7px;
   align-self: center;
@@ -405,14 +585,14 @@ tr:nth-child(even):hover {
 /* View Employee Modal */
 
 .view-employee-modal {
-  min-width: 1000px;
+  width: 1000px;
   margin: 0 auto;
   z-index: 10;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--white);
   min-height: 600px;
   overflow: auto;
   border-radius: 7px;
@@ -420,6 +600,15 @@ tr:nth-child(even):hover {
 
 .close-view-icon {
   align-self: flex-start;
+  padding: 10px;
+  transition: 0.5s;
+  cursor: pointer;
+  box-sizing: border-box;
+  width: 5%;
+}
+
+.close-view-icon:hover {
+  transform: scale(0.8);
 }
 
 .left-bar {
@@ -427,34 +616,43 @@ tr:nth-child(even):hover {
   color: var(--white);
   font-size: 16px;
   font-weight: 700;
-  padding: 40px 20px 20px;
+  padding: 70px 20px 20px;
   align-items: center;
   gap: 50px;
-  flex: 2;
+  width: 20%;
+  box-sizing: border-box;
 }
 
 .profile-photo-circle {
   display: inline-block;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   border-radius: 50%;
   background-color: var(--white);
+  overflow: clip;
+}
+
+.profile-photo-circle .profile-photo-view {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .right-bar {
   padding: 20px;
-  flex: 5;
+  width: 75%;
+  box-sizing: border-box;
 }
 
 .personal-details {
   justify-content: center;
   gap: 50px;
-  flex: 1;
+  width: 50%;
 }
 
 .skill-details {
   justify-content: center;
-  flex: 1;
+  width: 50%;
   gap: 10px;
 }
 
@@ -464,11 +662,37 @@ tr:nth-child(even):hover {
 
 .show-skills {
   display: inline-block;
+  box-sizing: border-box;
   border: 1px solid var(--eucalyptus);
   background-color: var(--light-green);
   width: 100%;
   height: 200px;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+.name-display {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.role-display {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.address-display {
+  border: none;
+  resize: none;
+  padding: 0;
   overflow-x: auto;
+  height: 70px;
+}
+
+.address-display-container {
+  /* overflow: auto; */
+  box-sizing: border-box;
 }
 
 /* delete modal */
@@ -487,7 +711,7 @@ tr:nth-child(even):hover {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--white);
   /* min-height: 600px; */
   overflow: auto;
   border-radius: 7px;
