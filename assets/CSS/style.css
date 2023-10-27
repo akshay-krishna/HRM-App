@@ -1,0 +1,538 @@
+/* common class */
+
+:root {
+  --eucalyptus: #27ae60;
+  --light-green: #e1ffee;
+  --white: #fff;
+  --red: #ff6262;
+  --hover-color: #8bd39e;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 500, "GRAD" 0, "opsz" 24;
+  font-size: 24px;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+}
+
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h2 {
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+.flex-row {
+  display: flex;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.top-btns {
+  /*Filter and add employee buttons*/
+  border: none;
+  background-color: var(--eucalyptus);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--white);
+  padding: 1px 4px;
+  align-items: center;
+  align-self: center;
+  border-radius: 7px;
+  border: 1px solid var(--eucalyptus);
+  transition: 0.6s;
+}
+
+.top-btns:hover {
+  background-color: var(--white);
+  color: var(--eucalyptus);
+  border: 1px solid var(--eucalyptus);
+}
+
+.open {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+.overlay.open {
+  height: 100%;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.432);
+  z-index: 2;
+}
+
+/* header */
+
+header {
+  background-color: var(--eucalyptus);
+}
+
+.header {
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1 {
+  padding: 10px 0;
+}
+
+.search-parent {
+  position: relative;
+}
+
+#search {
+  width: 450px;
+  height: 60px;
+  background-color: var(--white);
+  border: none;
+  border-radius: 7px;
+  padding-left: 10px;
+}
+
+#search::placeholder {
+  color: var(--eucalyptus);
+  font-weight: 700;
+  font-size: 18px;
+  opacity: 1;
+}
+
+.search-submit {
+  position: absolute;
+  right: 13px;
+  top: 15px;
+  border: none;
+  background-color: var(--white);
+  padding: 0;
+  height: 32px;
+}
+/* form section */
+
+.add-filter-section {
+  margin-top: 40px;
+  justify-content: space-between;
+}
+
+.sort-btn {
+  width: 150px;
+  height: 60px;
+  gap: 10px;
+  border-radius: 7px;
+}
+
+.filter-btn {
+  width: 170px;
+  height: 60px;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.add-employee-btn {
+  width: 195px;
+  height: 60px;
+  gap: 10px;
+  padding: 1px 10px;
+  cursor: pointer;
+}
+
+.add-employee-btn .add-employee-icon {
+  font-size: 30px;
+}
+
+.filter-btn .filter-icon {
+  font-size: 30px;
+}
+
+.filter-btn .down-arrow {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* Filter */
+
+.filter {
+  position: relative;
+}
+
+.skill-list {
+  list-style-type: none;
+  position: absolute;
+  padding-left: 0px;
+  top: 45px;
+  background-color: var(--white);
+  border: 1px solid var(--eucalyptus);
+  border-radius: 7px;
+  width: 165px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.skill-list li:nth-child(even) {
+  background-color: var(--light-green);
+}
+
+#skill-search {
+  border: none;
+  border-bottom: 1px solid var(--eucalyptus);
+  width: 83%;
+  padding: 0 5px 0 23px;
+  border-top-left-radius: 9px;
+  border-top-right-radius: 9px;
+  height: 60px;
+  font-size: 16px;
+}
+
+#skill-search::placeholder {
+  font-weight: 300;
+  font-size: 13px;
+}
+
+.skill-input {
+  position: relative;
+}
+
+.skill-search-icon {
+  position: absolute;
+  top: 20px;
+  width: 20px;
+}
+
+li {
+  padding: 20px 5px;
+  border-bottom: 1px solid var(--eucalyptus);
+  font-size: 16px;
+  font-weight: 700;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+/*table*/
+
+table {
+  width: 100%;
+  margin-top: 60px;
+  border: 5px solid var(--eucalyptus);
+}
+
+th {
+  background-color: var(--eucalyptus);
+  font-size: 18px;
+  color: var(--white);
+}
+
+td {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 0 15px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid var(--eucalyptus);
+  height: 60px;
+  transition: 0.6s;
+  cursor: pointer;
+}
+
+tr:hover {
+  background-color: var(--hover-color);
+}
+
+tr:nth-child(even) {
+  background-color: var(--light-green);
+  transition: 0.6s;
+}
+
+tr:nth-child(even):hover {
+  background-color: var(--hover-color);
+}
+
+.ascending {
+  height: 60px;
+  align-items: center;
+  gap: 5px;
+  padding: 0 15px;
+}
+
+.edit-delete-btn {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  cursor: pointer;
+}
+
+.action-icons {
+  gap: 50px;
+}
+
+/* Add Employee modal */
+.close-add-edit-icon {
+  align-self: flex-end;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close-add-edit-icon:hover {
+  transform: scale(0.8);
+}
+
+.add-edit-employee-modal {
+  min-width: 1000px;
+  margin: 0 auto;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  max-height: 80vh;
+  overflow: auto;
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.add-edit-employee-head {
+  align-items: center;
+}
+
+.add-profile-photo {
+  width: 150px;
+  cursor: pointer;
+}
+
+.add-edit-employee-form {
+  width: 100%;
+  margin-top: 50px;
+  gap: 50px;
+}
+
+.details {
+  justify-content: space-around;
+}
+
+.label-input {
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+}
+
+.add-edit-employee-form label {
+  font-size: 16px;
+}
+
+.add-edit-employee-form input {
+  height: 45px;
+  border: 1px solid var(--eucalyptus);
+  width: 300px;
+  padding-left: 10px;
+}
+
+.add-edit-employee-form textarea {
+  height: 45px;
+  border: 1px solid var(--eucalyptus);
+  width: 300px;
+  padding: 14px 2px 15px 10px;
+  resize: none;
+  height: 18px;
+}
+
+.field-space {
+  gap: 50px;
+}
+
+.skill-parent {
+  position: relative;
+}
+
+.add-skill-list {
+  list-style-type: none;
+  position: absolute;
+  padding-left: 0px;
+  top: 33px;
+  background-color: var(--white);
+  border: 1px solid var(--eucalyptus);
+  border-radius: 7px;
+  width: 165px;
+  right: 147px;
+}
+
+.add-skill-list li:nth-child(odd) {
+  background-color: var(--light-green);
+}
+
+.add-update-btn {
+  border: 1px solid var(--eucalyptus);
+  background-color: var(--eucalyptus);
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+  width: 200px;
+  height: 45px;
+  border-radius: 7px;
+  align-self: center;
+  border: 1px solid var(--eucalyptus);
+  transition: 0.3s;
+}
+
+.add-update-btn:hover {
+  background-color: var(--white);
+  color: var(--eucalyptus);
+  border: 1px solid var(--eucalyptus);
+}
+
+/* View Employee Modal */
+
+.view-employee-modal {
+  min-width: 1000px;
+  margin: 0 auto;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  min-height: 600px;
+  overflow: auto;
+  border-radius: 7px;
+}
+
+.close-view-icon {
+  align-self: flex-start;
+}
+
+.left-bar {
+  background-color: var(--eucalyptus);
+  color: var(--white);
+  font-size: 16px;
+  font-weight: 700;
+  padding: 40px 20px 20px;
+  align-items: center;
+  gap: 50px;
+  flex: 2;
+}
+
+.profile-photo-circle {
+  display: inline-block;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%;
+  background-color: var(--white);
+}
+
+.right-bar {
+  padding: 20px;
+  flex: 5;
+}
+
+.personal-details {
+  justify-content: center;
+  gap: 50px;
+  flex: 1;
+}
+
+.skill-details {
+  justify-content: center;
+  flex: 1;
+  gap: 10px;
+}
+
+#skills textarea {
+  resize: none;
+}
+
+.show-skills {
+  display: inline-block;
+  border: 1px solid var(--eucalyptus);
+  background-color: var(--light-green);
+  width: 100%;
+  height: 200px;
+  overflow-x: auto;
+}
+
+/* delete modal */
+.delete-update-modal {
+  max-width: 380px;
+  height: 380px;
+  margin: 0 auto;
+  margin-bottom: 100px;
+  align-items: center;
+  text-align: center;
+  border: 5px solid var(--red);
+  justify-content: space-around;
+  padding: 0 10px;
+  z-index: 10;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  /* min-height: 600px; */
+  overflow: auto;
+  border-radius: 7px;
+}
+
+.cancel-button {
+  border: 1px solid var(--eucalyptus);
+  background-color: var(--eucalyptus);
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+  width: 110px;
+  height: 45px;
+  border-radius: 7px;
+  border: 1px solid var(--eucalyptus);
+  transition: 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: var(--white);
+  border: 1px solid var(--eucalyptus);
+  color: var(--eucalyptus);
+}
+
+.delete-button,
+.update-button {
+  border: 1px solid var(--red);
+  background-color: var(--red);
+  color: var(--white);
+  font-weight: 700;
+  cursor: pointer;
+  width: 110px;
+  height: 45px;
+  border-radius: 7px;
+  border: 1px solid var(--red);
+  transition: 0.3s;
+}
+
+.delete-button:hover,
+.update-button:hover {
+  background-color: var(--white);
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.confirm-modal-btns {
+  gap: 80px;
+}

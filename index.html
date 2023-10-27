@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HRM App</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css"
+      integrity="sha512-oHDEc8Xed4hiW6CxD7qjbnI+B07vDdX7hEPTvn9pSZO1bcRqHp8mj9pyr+8RVC2GmtEfI2Bi9Ke9Ass0as+zpg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="assets/CSS/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+  </head>
+  <body>
+    <header>
+      <div class="overlay"></div>
+      <div class="flex-row header">
+        <h1><img src="assets/images/LOGO.svg" alt="logo" /></h1>
+        <form>
+          <div>
+            <div class="search-parent">
+              <input
+                type="text"
+                placeholder="Search By First Name"
+                name="search"
+                id="search"
+              />
+              <button class="search-submit" type="submit">
+                <img class="search-icon" src="assets/images/seach-icon.svg" />
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </header>
+    <main>
+      <section class="flex-row add-filter-section">
+        <button class="top-btns add-employee-btn flex-row" type="button">
+          <span class="material-symbols-outlined add-employee-icon">
+            person_add
+          </span>
+          <span>Add Employee</span>
+        </button>
+        <div class="filter">
+          <button class="top-btns filter-btn flex-row" type="button">
+            <span class="material-symbols-outlined filter-icon">
+              filter_alt
+            </span>
+            Filter Skills<span class="material-symbols-outlined down-arrow">
+              expand_more
+            </span>
+          </button>
+          <ul class="skill-list close">
+            <form class="skill-input">
+              <img
+                class="skill-search-icon"
+                src="assets/images/seach-icon.svg"
+              />
+              <input
+                type="text"
+                placeholder="Search By Skills"
+                name="skill-search"
+                id="skill-search"
+              />
+            </form>
+            <li>Skill 1</li>
+            <li>Skill 2</li>
+            <li>Skill 3</li>
+            <li>Skill 4</li>
+            <li>Skill 5</li>
+            <li>Skill 6</li>
+          </ul>
+        </div>
+      </section>
+      <table>
+        <thead>
+          <tr>
+            <th>
+              <div class="ascending flex-row">
+                Employee ID <img src="assets/images/ascending-arrow.svg" />
+              </div>
+            </th>
+            <th>
+              <div class="ascending flex-row">
+                First Name <img src="assets/images/ascending-arrow.svg" />
+              </div>
+            </th>
+            <th>
+              <div class="ascending flex-row">
+                Last Name <img src="assets/images/ascending-arrow.svg" />
+              </div>
+            </th>
+            <th>
+              <div class="ascending flex-row">
+                Role
+                <img src="assets/images/ascending-arrow.svg" />
+              </div>
+            </th>
+            <th>
+              <div class="ascending flex-row">
+                Department <img src="assets/images/ascending-arrow.svg" />
+              </div>
+            </th>
+            <th>
+              <div class="ascending flex-row">Actions</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr data-employee-id="1001">
+            <td data-column="id">1001</td>
+            <td data-column="fname">Ashwin</td>
+            <td data-column="lname">Nair</td>
+            <td data-column="role">Intern</td>
+            <td data-column="dept">Development</td>
+            <td>
+              <div class="flex-row action-icons">
+                <img
+                  class="edit-delete-btn edit-btn"
+                  src="assets/images/edit-icon.svg"
+                />
+                <img
+                  class="edit-delete-btn delete-btn"
+                  src="assets/images/delete-icon.svg"
+                />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td data-column="id">1002</td>
+            <td data-column="fname">Nijin</td>
+            <td data-column="lname">Nazar</td>
+            <td data-column="role">Intern</td>
+            <td data-column="dept">Development</td>
+            <td>
+              <div class="flex-row action-icons">
+                <img
+                  class="edit-delete-btn edit-btn"
+                  src="assets/images/edit-icon.svg"
+                />
+                <img
+                  class="edit-delete-btn delete-btn"
+                  src="assets/images/delete-icon.svg"
+                />
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td>1003</td>
+            <td>Abhijith</td>
+            <td>Biju</td>
+            <td>Intern</td>
+            <td>Development</td>
+            <td>
+              <div class="flex-row action-icons">
+                <img
+                  class="edit-delete-btn edit-btn"
+                  src="assets/images/edit-icon.svg"
+                />
+                <img
+                  class="edit-delete-btn delete-btn"
+                  src="assets/images/delete-icon.svg"
+                />
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <section class="add-edit-employee-modal flex-column close">
+        <img class="close-add-edit-icon" src="assets/images/close-icon.svg" />
+        <div class="add-edit-employee-head flex-column">
+          <div class="">
+            <img
+              class="add-profile-photo"
+              src="assets/images/add-profile-photo.svg"
+            />
+          </div>
+          <h2>Add Employee</h2>
+        </div>
+        <form class="add-edit-employee-form flex-column">
+          <div class="flex-row details">
+            <div class="flex-column field-space">
+              <div class="flex-row label-input">
+                <label for="fname">First Name</label>
+                <input type="text" id="fname" name="fname" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="lname">Last Name</label>
+                <input type="text" id="lname" name="lname" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="role">Role</label>
+                <input type="text" id="role" name="role" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="location">Working Location</label>
+                <input type="text" id="location" name="location" />
+              </div>
+            </div>
+            <div class="flex-column field-space">
+              <div class="flex-row label-input">
+                <label for="email">Email ID</label>
+                <input type="email" id="email" name="email" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="dob">Date Of Birth</label>
+                <input type="date" id="dob" name="dob" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="phone-number">Phone Number</label>
+                <input type="tel" id="phone-number" name="phone-number" />
+              </div>
+              <div class="flex-row label-input">
+                <label for="address">Address</label>
+                <textarea
+                  name="address"
+                  placeholder="Enter your Permanent Address"
+                  id="address"
+                ></textarea>
+                <!-- <input type="text" id="address" name="address" /> -->
+              </div>
+              <div class="flex-row label-input skill-parent">
+                <label for="skill-add-search">Skills</label>
+                <input
+                  type="text"
+                  placeholder="Search By Skills"
+                  name="skill-add-search"
+                  id="skill-add-search"
+                />
+                <ul class="add-skill-list close">
+                  <li>Skill 1</li>
+                  <li>Skill 2</li>
+                  <li>Skill 3</li>
+                  <li>Skill 4</li>
+                  <li>Skill 5</li>
+                  <li>Skill 6</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <button class="add-update-btn" type="button">
+            <span class="add-update-text">Add Employee Profile</span>
+          </button>
+        </form>
+      </section>
+
+      <section class="view-employee-modal flex-row close">
+        <div class="flex-column left-bar">
+          <span class="profile-photo-circle"></span>
+          <p>Employee ID</p>
+          <p>Department</p>
+          <p>Email ID</p>
+        </div>
+        <div class="flex-row right-bar">
+          <div class="flex-column personal-details">
+            <p>Name</p>
+            <p>Role</p>
+            <p>DOJ</p>
+            <p>DOB</p>
+            <p>Phone Number</p>
+            <p>Working Location</p>
+            <p>Address</p>
+          </div>
+          <div class="flex-column skill-details">
+            <p>Skills</p>
+            <div class="show-skills"></div>
+          </div>
+        </div>
+        <img class="close-view-icon" src="assets/images/close-icon.svg" />
+      </section>
+
+      <section class="delete-update-modal flex-column close">
+        <img src="assets/images/delete-modal-image.svg" />
+        <h2>Are you sure?</h2>
+        <p>
+          Do you really want to <span class="delete-update">delete</span> these
+          records? This process cannot be undone.
+        </p>
+        <div class="flex-row confirm-modal-btns">
+          <button class="cancel-button" type="button">Cancel</button>
+          <button class="delete-button update-button" type="button">
+            Delete
+          </button>
+        </div>
+      </section>
+    </main>
+
+    <script type="module" src="JavaScript/index.js"></script>
+  </body>
+</html>
